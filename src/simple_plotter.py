@@ -55,6 +55,9 @@ class Plotter(object):
         z = eval(self._func)
         fig = plt.figure()
         ax = Axes3D(fig)
+        ax.set_xlabel("{}-axis".format(var1))
+        ax.set_ylabel("{}-axis".format(var2))
+        ax.set_zlabel("{}-axis".format('z'))
         exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
         plt.show()
 
