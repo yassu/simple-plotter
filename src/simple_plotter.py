@@ -111,6 +111,14 @@ def get_parser():
         dest='ymax',
         help='set max of y-value'
     )
+
+    parser.add_option(
+        '--title',
+        action='store',
+        dest='title',
+        help='set title of graph'
+    )
+
     return parser
 
 def main():
@@ -123,7 +131,7 @@ def main():
 
     funcname = funcnames[0]
     plot_kw = {}
-    plot_kw_names = ('xmin', 'xmax', 'ymin', 'ymax')
+    plot_kw_names = ('xmin', 'xmax', 'ymin', 'ymax', 'title')
     for kw_name in plot_kw_names:
         if getattr(options, kw_name, None) is not None:
             plot_kw[kw_name] = getattr(options, kw_name)
