@@ -34,13 +34,15 @@ class Plotter(object):
         return set(filter(lambda m: m != '' and m not in FUNC_NAMES, matchs))
 
 
-    def plot(self):
+    def plot(self, show=True, fig_filename=None):
         if len(self._varnames) == 1:
-            self.explicit_2d_plot()
+            self.explicit_2d_plot(show=show)
         elif len(self._varnames) == 2:
-            self.explicit_3d_plot()
+            self.explicit_3d_plot(show=show)
+        if fig_filename:
+            plt.savefig(fig_filename)
 
-    def explicit_2d_plot(self):
+    def explicit_2d_plot(self, show=True):
         var = list(self._varnames).pop()
         if self._title:
             plt.title(self._title)
@@ -54,9 +56,10 @@ class Plotter(object):
         exec('plt.plot({var}, y)'.format(var=var))
         plt.xlabel('{}-axis'.format(var))
         plt.ylabel('{}-axis'.format('y'))
-        plt.show()
+        if show:
+            plt.show()
 
-    def explicit_3d_plot(self):
+    def explicit_3d_plot(self, show=True):
         from mpl_toolkits.mplot3d import Axes3D
         var1, var2 = list(self._varnames)
         exec('{var1} = np.linspace('
@@ -76,7 +79,8 @@ class Plotter(object):
         ax.set_ylabel("{}-axis".format(var2))
         ax.set_zlabel("{}-axis".format('z'))
         exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
-        plt.show()
+        if show:
+            plt.show()
 
 def get_parser():
     parser = OptionParser(version=__version__)

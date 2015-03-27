@@ -1,4 +1,6 @@
 - [x] title option [2015/03/27 13:22]
 - [ ] if output is declared, save file.
+  - [ ] show option: for declare to show plot
+- [ ] if input is declared, input as data file and not using function
 - [ ] param plot
 - [ ] implicit plot
