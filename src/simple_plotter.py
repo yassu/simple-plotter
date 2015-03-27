@@ -14,6 +14,10 @@ class Plotter(object):
     def __init__(self, func_text, **kw):
         self._varnames = self.get_varnames(func_text)
         self._func = self.replace_to_np(func_text)
+        self._xmin = kw.get('xmin', DEFAULT_MIN_X)
+        self._xmax = kw.get('xmax', DEFAULT_MAX_X)
+        self._ymin = kw.get('ymin', DEFAULT_MIN_Y)
+        self._ymax = kw.get('ymax', DEFAULT_MAX_Y)
 
     def replace_to_np(self, func_text):
         for funcname, np_funcname in FUNC_NAMES.items():
@@ -34,10 +38,12 @@ class Plotter(object):
     def explicit_2d_plot(self):
         var = list(self._varnames).pop()
         exec(
-        '{var} = np.linspace(DEFAULT_MIN_X, DEFAULT_MAX_X, DEFAULT_SEP_NUM)'.
-            format(var=var))
-        x = np.linspace(DEFAULT_MIN_X, DEFAULT_MAX_X, DEFAULT_SEP_NUM)
+        '{var} = np.linspace({xmin}, {xmax}, DEFAULT_SEP_NUM)'.
+            format(var=var, xmin=self._xmin, xmax=self._xmax))
+        x = np.linspace(self._xmin, self._xmax, DEFAULT_SEP_NUM)
         y = eval(self._func)
+        plt.xlim(self._xmin, self._xmax)
+        plt.ylim(self._ymin, self._ymax)
         exec('plt.plot({var}, y)'.format(var=var))
         plt.xlabel('{}-axis'.format(var))
         plt.ylabel('{}-axis'.format('y'))
@@ -47,10 +53,10 @@ class Plotter(object):
         from mpl_toolkits.mplot3d import Axes3D
         var1, var2 = list(self._varnames)
         exec('{var1} = np.linspace('
-                'DEFAULT_MIN_X, DEFAULT_MAX_X,'
+                'self._xmin, self._xmax,'
                 'DEFAULT_SEP_NUM)'.format(var1=var1))
         exec('{var2} = np.linspace('
-                'DEFAULT_MIN_Y, DEFAULT_MAX_Y,'
+                'self._ymin, self._ymax,'
                 'DEFAULT_SEP_NUM)'.format(var2=var2))
         exec('{var1}, {var2} = np.meshgrid({var1}, {var2})'.format(
             var1=var1, var2=var2))
