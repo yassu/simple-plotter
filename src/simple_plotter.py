@@ -39,6 +39,7 @@ class Plotter(object):
         x = np.linspace(DEFAULT_MIN_X, DEFAULT_MAX_X, DEFAULT_SEP_NUM)
         y = eval(self._func)
         exec('plt.plot({var}, y)'.format(var=var))
+        plt.xlabel('{}-axis'.format(var))
         plt.show()
 
     def explicit_3d_plot(self):
