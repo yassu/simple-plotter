@@ -40,6 +40,7 @@ class Plotter(object):
         y = eval(self._func)
         exec('plt.plot({var}, y)'.format(var=var))
         plt.xlabel('{}-axis'.format(var))
+        plt.ylabel('{}-axis'.format('y'))
         plt.show()
 
     def explicit_3d_plot(self):
