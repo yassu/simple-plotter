@@ -124,7 +124,7 @@ def get_parser():
     )
 
     parser.add_option(
-        '-o', '--img',
+        '-o', '--save',
         action='store',
         dest='fig_filename',
         help='save as image_filename'
