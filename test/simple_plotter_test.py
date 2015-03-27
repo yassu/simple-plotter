@@ -8,3 +8,6 @@ def get_names_test1():
 
 def get_names_test2():
     assert(get_varnames('t**2') == {'t'})
+
+def get_names_test3():
+    assert(get_varnames('sin(x**2)') == {'x'})
