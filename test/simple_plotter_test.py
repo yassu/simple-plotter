@@ -1,13 +1,15 @@
 from sys import path
 path.append('src')
-from simple_plotter import get_varnames
+from simple_plotter import Plotter
 
+def get_varname_test1():
+    plotter = Plotter('x**2 + y**2')
+    assert(plotter._varnames == {'x', 'y'})
 
-def get_varnames_test1():
-    assert(get_varnames('x**2 + y**3') == {'x', 'y'})
+def get_varname_test2():
+    plotter = Plotter('sin(x**2)')
+    assert(plotter._varnames == {'x'})
 
-def get_varnames_test2():
-    assert(get_varnames('t**2') == {'t'})
-
-def get_varnames_test3():
-    assert(get_varnames('sin(x**2)') == {'x'})
+def replace_to_np_test():
+    plotter = Plotter('sin(x**2) + cos(y**2)')
+    assert(plotter._func == 'np.sin(x**2) + np.cos(y**2)')
