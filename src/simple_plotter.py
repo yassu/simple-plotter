@@ -22,6 +22,7 @@ class Plotter(object):
         self._xmax = kw.get('xmax', DEFAULT_MAX_X)
         self._ymin = kw.get('ymin', DEFAULT_MIN_Y)
         self._ymax = kw.get('ymax', DEFAULT_MAX_Y)
+        self._title = kw.get('title', None)
 
     def replace_to_np(self, func_text):
         for funcname, np_funcname in FUNC_NAMES.items():
@@ -41,6 +42,8 @@ class Plotter(object):
 
     def explicit_2d_plot(self):
         var = list(self._varnames).pop()
+        if self._title:
+            plt.title(self._title)
         exec(
         '{var} = np.linspace({xmin}, {xmax}, DEFAULT_SEP_NUM)'.
             format(var=var, xmin=self._xmin, xmax=self._xmax))
@@ -67,6 +70,8 @@ class Plotter(object):
         z = eval(self._func)
         fig = plt.figure()
         ax = Axes3D(fig)
+        if self._title:
+            ax.set_title(self._title)
         ax.set_xlabel("{}-axis".format(var1))
         ax.set_ylabel("{}-axis".format(var2))
         ax.set_zlabel("{}-axis".format('z'))
