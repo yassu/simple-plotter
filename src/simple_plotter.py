@@ -26,6 +26,17 @@ class Plotter(object):
 
 
     def plot(self):
+        self.explicit_2d_plot()
+
+    def explicit_2d_plot(self):
+        var = list(self._varnames).pop()
+        exec(
+        '{var} = np.linspace(DEFAULT_MIN_X, DEFAULT_MAX_X, DEFAULT_SEP_NUM)'.
+            format(var=var))
         x = np.linspace(DEFAULT_MIN_X, DEFAULT_MAX_X, DEFAULT_SEP_NUM)
-        y = np.sin(x)
-        plt.plot(x, y)
+        y = eval(self._func)
+        exec('plt.plot({var}, y)'.format(var=var))
+        plt.show()
+
+plotter = Plotter('x**2')
+plotter.explicit_2d_plot()
