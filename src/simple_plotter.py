@@ -149,8 +149,7 @@ def main():
 
     plotter = Plotter(funcname, **plot_kw)
     if getattr(options, 'fig_filename'):
-        plotter.plot(show=False)
-        plt.savefig(options.fig_filename)
+        plotter.plot(show=False, fig_filename=options.fig_filename)
     else:
         plotter.plot()
 
