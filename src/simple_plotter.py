@@ -1,6 +1,10 @@
 import re
+from optparse import OptionParser
 import matplotlib.pyplot as plt
 import numpy as np
+
+__version__ = '0.1.0'
+
 FUNC_NAMES = {'sin': 'np.sin', 'cos': 'np.cos', 'tan': 'np.tan'}
 
 DEFAULT_MIN_X = -1
@@ -69,10 +73,57 @@ class Plotter(object):
         exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
         plt.show()
 
+def get_parser():
+    parser = OptionParser(version=__version__)
+    parser.add_option(
+        '--xmin',
+        action='store',
+        type='float',
+        dest='xmin',
+        help='set min of x-value'
+    )
+
+    parser.add_option(
+        '--xmax',
+        action='store',
+        type=float,
+        dest='xmax',
+        help='set max of x-value'
+    )
+
+    parser.add_option(
+        '--ymin',
+        action='store',
+        type=float,
+        dest='ymin',
+        help='set min of y-value'
+    )
+
+    parser.add_option(
+        '--ymax',
+        action='store',
+        type=float,
+        dest='ymax',
+        help='set max of y-value'
+    )
+    return parser
+
 def main():
-    from sys import argv
-    funcname = argv[1]
-    plotter = Plotter(funcname)
+    parser = get_parser()
+    (options, funcnames) = parser.parse_args()
+
+    if len(funcnames) == 0:
+        print('Please input function')
+        exit()
+
+    funcname = funcnames[0]
+    plot_kw = {}
+    plot_kw_names = ('xmin', 'xmax', 'ymin', 'ymax')
+    for kw_name in plot_kw_names:
+        if getattr(options, kw_name, None) is not None:
+            plot_kw[kw_name] = getattr(options, kw_name)
+
+    plotter = Plotter(funcname, **plot_kw)
     plotter.plot()
 
 if __name__ == '__main__':
