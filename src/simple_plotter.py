@@ -26,7 +26,10 @@ class Plotter(object):
 
 
     def plot(self):
-        self.explicit_2d_plot()
+        if len(self._varnames) == 1:
+            self.explicit_2d_plot()
+        elif len(self._varnames) == 2:
+            self.explicit_3d_plot()
 
     def explicit_2d_plot(self):
         var = list(self._varnames).pop()
@@ -38,5 +41,22 @@ class Plotter(object):
         exec('plt.plot({var}, y)'.format(var=var))
         plt.show()
 
-plotter = Plotter('x**2')
-plotter.explicit_2d_plot()
+    def explicit_3d_plot(self):
+        from mpl_toolkits.mplot3d import Axes3D
+        var1, var2 = list(self._varnames)
+        exec('{var1} = np.linspace('
+                'DEFAULT_MIN_X, DEFAULT_MAX_X,'
+                'DEFAULT_SEP_NUM)'.format(var1=var1))
+        exec('{var2} = np.linspace('
+                'DEFAULT_MIN_Y, DEFAULT_MAX_Y,'
+                'DEFAULT_SEP_NUM)'.format(var2=var2))
+        exec('{var1}, {var2} = np.meshgrid({var1}, {var2})'.format(
+            var1=var1, var2=var2))
+        z = eval(self._func)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
+        plt.show()
+
+plotter = Plotter('x**2+y**2')
+plotter.explicit_3d_plot()
