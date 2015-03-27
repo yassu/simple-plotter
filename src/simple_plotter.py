@@ -123,6 +123,13 @@ def get_parser():
         help='set title of graph'
     )
 
+    parser.add_option(
+        '-o', '--img',
+        action='store',
+        dest='fig_filename',
+        help='save as image_filename'
+    )
+
     return parser
 
 def main():
@@ -141,7 +148,11 @@ def main():
             plot_kw[kw_name] = getattr(options, kw_name)
 
     plotter = Plotter(funcname, **plot_kw)
-    plotter.plot()
+    if getattr(options, 'fig_filename'):
+        plotter.plot(show=False)
+        plt.savefig(options.fig_filename)
+    else:
+        plotter.plot()
 
 if __name__ == '__main__':
     main()
