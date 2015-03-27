@@ -39,6 +39,7 @@ class Plotter(object):
         x = np.linspace(DEFAULT_MIN_X, DEFAULT_MAX_X, DEFAULT_SEP_NUM)
         y = eval(self._func)
         exec('plt.plot({var}, y)'.format(var=var))
+        plt.xlabel('{}-axis'.format(var))
         plt.show()
 
     def explicit_3d_plot(self):
@@ -61,5 +62,11 @@ class Plotter(object):
         exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
         plt.show()
 
-plotter = Plotter('x**2+y**2')
-plotter.explicit_3d_plot()
+def main():
+    from sys import argv
+    funcname = argv[1]
+    plotter = Plotter(funcname)
+    plotter.plot()
+
+if __name__ == '__main__':
+    main()
