@@ -17,14 +17,23 @@ VAR_PAT = re.compile('[a-zA-Z]*')
 class Plotter(object):
     def __init__(self, func_text, **kw):
         self._varnames = self.get_varnames(func_text)
-        self._func = self.replace_to_np(func_text)
+        self._funcs = self.get_funcs(func_text)
+        if len(self._funcs) == 1:
+            self._func = self._funcs[0]
         self._xmin = kw.get('xmin', DEFAULT_MIN_X)
         self._xmax = kw.get('xmax', DEFAULT_MAX_X)
         self._ymin = kw.get('ymin', DEFAULT_MIN_Y)
         self._ymax = kw.get('ymax', DEFAULT_MAX_Y)
         self._title = kw.get('title', None)
 
-    def replace_to_np(self, func_text):
+    @staticmethod
+    def get_funcs(func_text):
+        if func_text.startswith('(') and func_text.endswith(')'):
+            func_text = func_text[1:-1]
+        return tuple(re.split('\s*,\s*', func_text))
+
+    @staticmethod
+    def replace_to_np(func_text):
         for funcname, np_funcname in FUNC_NAMES.items():
             func_text = func_text.replace(funcname, np_funcname)
         return func_text
