@@ -2,8 +2,8 @@ import re
 from optparse import OptionParser
 import matplotlib.pyplot as plt
 import numpy as np
-
 __version__ = '0.1.0'
+
 
 FUNC_NAMES = {'sin': 'np.sin', 'cos': 'np.cos', 'tan': 'np.tan'}
 
