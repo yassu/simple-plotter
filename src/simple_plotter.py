@@ -49,15 +49,18 @@ class Plotter(object):
 
     def plot(self, show=True, fig_filename=None):
         if len(self._varnames) == 1 and len(self._funcs) >= 2:
-            self.param_2d_plot(show=show)
+            self.param_2d_plot()
         elif len(self._varnames) == 1:
-            self.explicit_2d_plot(show=show)
+            self.explicit_2d_plot()
         elif len(self._varnames) == 2:
-            self.explicit_3d_plot(show=show)
+            self.explicit_3d_plot()
         if fig_filename:
             plt.savefig(fig_filename)
 
-    def explicit_2d_plot(self, show=True):
+        if show:
+            plt.show()
+
+    def explicit_2d_plot(self):
         var = list(self._varnames).pop()
         if self._title:
             plt.title(self._title)
@@ -71,10 +74,8 @@ class Plotter(object):
         exec('plt.plot({var}, y)'.format(var=var))
         plt.xlabel('{}-axis'.format(var))
         plt.ylabel('{}-axis'.format('y'))
-        if show:
-            plt.show()
 
-    def explicit_3d_plot(self, show=True):
+    def explicit_3d_plot(self):
         from mpl_toolkits.mplot3d import Axes3D
         var1, var2 = list(self._varnames)
         exec('{var1} = np.linspace('
@@ -94,10 +95,8 @@ class Plotter(object):
         ax.set_zlabel("{}-axis".format('z'))
         z = eval(self.replace_to_np(self._func))
         exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
-        if show:
-            plt.show()
 
-    def param_2d_plot(self, show=True):
+    def param_2d_plot(self):
         var = list(self._varnames).pop()
         if self._title:
             plt.title(self._title)
@@ -112,8 +111,6 @@ class Plotter(object):
         plt.plot(xs, ys)
         plt.xlabel('x-axis')
         plt.ylabel('y-axis')
-        if show:
-            plt.show()
 
 
 def get_parser():
