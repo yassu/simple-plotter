@@ -58,8 +58,6 @@ class Plotter(object):
         exec(
         '{var} = np.linspace({xmin}, {xmax}, DEFAULT_SEP_NUM)'.
             format(var=var, xmin=self._xmin, xmax=self._xmax))
-        x = np.linspace(self._xmin, self._xmax, DEFAULT_SEP_NUM)
-        y = eval(self._func)
         plt.xlim(self._xmin, self._xmax)
         plt.ylim(self._ymin, self._ymax)
         exec('plt.plot({var}, y)'.format(var=var))
@@ -79,7 +77,6 @@ class Plotter(object):
                 'DEFAULT_SEP_NUM)'.format(var2=var2))
         exec('{var1}, {var2} = np.meshgrid({var1}, {var2})'.format(
             var1=var1, var2=var2))
-        z = eval(self._func)
         fig = plt.figure()
         ax = Axes3D(fig)
         if self._title:
