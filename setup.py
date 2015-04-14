@@ -1,5 +1,5 @@
 from setuptools import setup
-from src.simple_plotter import __version__
+from src.const import __version__
 
 
 setup(
@@ -12,6 +12,7 @@ setup(
         "This program provides plotter command, for very simple plot.\n"
         "Note that this program depends on matplotlib."
         ),
+
     url='https://github.com/yassu/simple-plotter',
     classifiers=[
         'Programming Language :: Python',
@@ -29,6 +30,9 @@ setup(
         'Released Under the Apache license\n'
         'https://github.com/yassu/simple-plotter\n'
     ),
+    install_requires=[
+        'matplotlib'
+    ],
     entry_points = {
         'console_scripts': [
             'plotter = src.simple_plotter:main'],
