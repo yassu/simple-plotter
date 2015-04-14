@@ -31,7 +31,8 @@ setup(
         'https://github.com/yassu/simple-plotter\n'
     ),
     install_requires=[
-        'matplotlib'
+        'matplotlib',
+        'numpy'
     ],
     entry_points = {
         'console_scripts': [
