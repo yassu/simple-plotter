@@ -12,4 +12,4 @@ For example, when you run this script as following:
 
 then, you can see following image.
 
-![simple_cusp](http://gyazo.com/baa973f4902a67544fe2eb9b28d6ee64.png)
+.. image:: http://gyazo.com/baa973f4902a67544fe2eb9b28d6ee64.png
