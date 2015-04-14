@@ -3,6 +3,7 @@
   - [-] show option: for declare to show plot
 - [x] param plot [2015/04/14 10:58]
 - [ ] update readme
+- [ ] setup.py
 - [ ] if input is declared, input as data file and not using function
 - [ ] implicit plot
 - [ ] animation

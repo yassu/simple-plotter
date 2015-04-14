@@ -3,6 +3,7 @@ Simple Plotter
 ===================
 
 This project is graph plotter by command line.
+Note that this project is provide `matplotlib`.
 
 For example, when you run this script as following:
 
@@ -53,3 +54,13 @@ For plot in 3-dimensional space, you can only draw explicit plot by following sy
    :alt: x**2 + y**3
    :width: 218
    :height: 186
+
+Options
+============
+
+* `--xmin`: set minimum value of `x`
+* `--xmax`: set maximum value of `x`
+* `--ymin`: set minimum value of `y`
+* `--ymax`: set maximum value of `y`
+* `--title`: set title of graph
+* `--o`, `--save`: save graph as image file, without showing
