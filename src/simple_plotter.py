@@ -64,7 +64,7 @@ class Plotter(object):
         exec(
             '{var} = np.linspace({xmin}, {xmax}, DEFAULT_SEP_NUM)'.
             format(var=var, xmin=self._xmin, xmax=self._xmax))
-        y = eval(self._func)
+        y = eval(self.replace_to_np(self._func))
 
         plt.xlim(self._xmin, self._xmax)
         plt.ylim(self._ymin, self._ymax)
@@ -92,7 +92,7 @@ class Plotter(object):
         ax.set_xlabel("{}-axis".format(var1))
         ax.set_ylabel("{}-axis".format(var2))
         ax.set_zlabel("{}-axis".format('z'))
-        z = eval(self._func)
+        z = eval(self.replace_to_np(self._func))
         exec('ax.plot_wireframe({}, {}, {})'.format(var1, var2, 'z'))
         if show:
             plt.show()
