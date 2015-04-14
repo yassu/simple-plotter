@@ -10,7 +10,7 @@ setup(
         'simple plotter by using matplotlib in your console'),
     long_description=(
         "This program provides plotter command, for very simple plot.\n"
-        "Note that this program depends on matplotlib"
+        "Note that this program depends on matplotlib."
         ),
     url='https://github.com/yassu/simple-plotter',
     classifiers=[
