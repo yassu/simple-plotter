@@ -20,7 +20,6 @@ def get_varname_test2():
     assert(plotter._varnames == {'x'})
 
 def replace_to_np_test():
-    plotter = Plotter('sin(x**2) + cos(y**2)')
     assert(Plotter.replace_to_np('sin(x**2) + cos(y**2)') == 'np.sin(x**2) + np.cos(y**2)')
 
 def xmin_test():
