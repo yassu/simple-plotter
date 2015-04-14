@@ -1,6 +1,8 @@
 - [x] title option [2015/03/27 13:22]
 - [x] if output is declared, save file. [2015/03/27 14:05]
   - [-] show option: for declare to show plot
+- [x] param plot [2015/04/14 10:58]
+- [ ] update readme
 - [ ] if input is declared, input as data file and not using function
-- [ ] param plot
 - [ ] implicit plot
+- [ ] animation
