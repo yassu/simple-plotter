@@ -2,10 +2,10 @@ import re
 from optparse import OptionParser
 import matplotlib.pyplot as plt
 import numpy as np
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 
-FUNC_NAMES = {'sin': 'np.sin', 'cos': 'np.cos', 'tan': 'np.tan'}
+FUNC_NAMES = dict([[name, 'np.{}'.format(name)] for name in dir(np)])
 
 DEFAULT_MIN_X = -1
 DEFAULT_MAX_X = 1
@@ -21,6 +21,7 @@ VAR_PAT = re.compile('[a-zA-Z]*')
 class Plotter(object):
 
     def __init__(self, func_text, **kw):
+        func_text = func_text.replace('^', '**')
         self._varnames = self.get_varnames(func_text)
         self._funcs = self.get_funcs(func_text)
         if len(self._funcs) == 1:
