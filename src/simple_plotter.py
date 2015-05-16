@@ -55,9 +55,11 @@ class Plotter(object):
             self.explicit_2d_plot()
         elif len(self._varnames) == 2:
             self.explicit_3d_plot()
+        else:
+            print("Illegal input")
+
         if fig_filename:
             plt.savefig(fig_filename)
-
         if show:
             plt.show()
 
